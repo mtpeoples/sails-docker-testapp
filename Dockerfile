@@ -1,11 +1,10 @@
 FROM node
 
-WORKDIR /usr/src/app
+RUN npm install -g sails grunt bower pm2 npm-check-updates
+COPY . /src
+WORKDIR /src
+RUN npm install /src
 
-COPY . /usr/src/app
-
-RUN rm -Rf /usr/src/app/node_modules && npm install
+VOLUME ["/src"]
 
 EXPOSE 1337
-
-CMD ["npm", "start"]

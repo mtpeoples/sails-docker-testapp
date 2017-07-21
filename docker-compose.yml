@@ -1,16 +1,17 @@
 version: '2'
 services:
   api:
-    image: node
-    #from: node:4.0
+    image: db_node
     ports:
       - "1337:1337"
-    command: npm start
+    command: npm start /src
     environment:
       - NODE_ENV=dev
     volumes:
-      - ./:/usr/src/app
-    working_dir: /usr/src/app
+      - ./:/src
+    working_dir: /src
+    links:
+      - db
   db:
     image: postgres
     ports:
